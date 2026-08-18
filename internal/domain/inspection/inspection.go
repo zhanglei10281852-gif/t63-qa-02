@@ -105,10 +105,8 @@ func (i Inspection) Submit(now time.Time) (Inspection, error) {
 
 func (i Inspection) Clone() Inspection {
 	result := i
-	result.Items = i.Items
-	for index := range result.Items {
-		result.Items[index].InspectionID = i.ID
-	}
+	result.Items = make([]Item, len(i.Items))
+	copy(result.Items, i.Items)
 	return result
 }
 
